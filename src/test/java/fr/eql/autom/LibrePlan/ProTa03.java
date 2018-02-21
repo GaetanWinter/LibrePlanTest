@@ -61,7 +61,7 @@ public class ProTa03 {
 			options.addPreference("browser.tabs.remote.autostart", false);
 			driver = new FirefoxDriver(options);
 		}
-		driver.get("http://localhost:8080/libreplan/common/layout/login.zul");
+		driver.get("http://localhost:8084/libreplan/common/layout/login.zul");
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}	
 	
