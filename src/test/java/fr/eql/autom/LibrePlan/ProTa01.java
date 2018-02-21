@@ -17,7 +17,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.PageFactory;
 
 
@@ -35,8 +39,30 @@ public class ProTa01 {
 	@Before
 	public void setup(){
 
-		driver = new FirefoxDriver();
-		driver.manage().window().maximize();
+
+		
+		///Set Up du navigateur
+		String nav = System.getProperty("navigateur");
+		WebDriver driver = null;
+		
+		//nav = "chrome";				
+		if(nav.equals("chrome")) {
+		    driver = new ChromeDriver();
+		}
+		
+		//nav = "internet explorer";				
+		if(nav.equals("ie")) {
+		    driver = new InternetExplorerDriver();
+		}
+		
+		if(nav.equals("firefox")) {
+			//Sélection de firefox comme navigateur	
+
+			System.setProperty("webdriver.gecko.driver", "C:\\projet3\\webdriver\\geckodriver.exe");	
+			FirefoxOptions options = new FirefoxOptions().setProfile(new FirefoxProfile());
+			options.addPreference("browser.tabs.remote.autostart", false);
+			driver = new FirefoxDriver(options);
+		}
 		driver.get("http://localhost:8080/libreplan/common/layout/login.zul");
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
