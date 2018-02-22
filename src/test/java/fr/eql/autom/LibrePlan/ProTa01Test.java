@@ -39,14 +39,17 @@ public class ProTa01Test extends BeforeTest{
 		//2- Click sur le bouton d'ajout de projet et redirection sur le popup de l'ajout de projet.
 		PopupProjectAdd projectAdd = plan.clickProjectAdd();
 		//3- Complétion du formulaire d'ajout de projet, validation et redirection sur la page des détails du projet.
-		ProjectDetailsPage project = projectAdd.setProject("PROJET_TEST1", "PRJTST001", "May 8, 2018", "May 18, 2018");
-		
+		ProjectDetailsPage project = projectAdd.setProject("PROJET_TEST1", "PRJTST001", "May 8, 2018", "May 18, 2018");	
+		Thread.sleep(1000);
 		//7- Click sur l'icône d'annulation d'édition ( flèche verte en haut à gauche).
 		project.clickCancel();
+		Thread.sleep(1000);
 		//8- Annulation de l'annulation d'édition
 		project.clickCancelNo();
+		Thread.sleep(1000);
 		//9- Click sur l'icône d'annulation d'édition ( flèche verte en haut à gauche).
 		project.clickCancel();
+		Thread.sleep(1000);
 		//10- Validation de l'annulation d'édition
 		ProjectsPlanningPage projects2 = project.clickCancelYes();
 				
