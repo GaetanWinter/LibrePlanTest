@@ -18,16 +18,18 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 
 
-//Cas de test Pro_TA_04 : Affichage planning d'un projet
-public class ProTa04 extends BeforeTest {
+//Cas de test Pro_TA_03 : Allouer une ressource à un projet
+public class ProTa03Test extends BeforeTest {
 
 //Corps du test de création de projet
 	@Test
@@ -38,36 +40,69 @@ public class ProTa04 extends BeforeTest {
 		//1- Redirection vers la page d'accueuil grâce à la méthode de connexion issue de la page-objet correspondante avec les identifiants admin.
 		ProjectsPlanningPage plan = log.connexion("admin", "admin");
 		
+		// Ajout d'une resource
+		Actions action = new Actions(driver);
+		WebElement we = driver.findElement(By.xpath(".//table[@class='z-menu-body']//button[contains(text(),'Resources')]"));
+		action.moveToElement(we).build().perform();
+		Thread.sleep(1000);
+		action.moveToElement(driver.findElement(By.xpath(".//a[@class='z-menu-item-cnt'][@href='/libreplan/resources/worker/worker.zul']"))).click().build().perform();
+		Thread.sleep(1000);
+		
+		driver.findElement(By.xpath(".//div[@class='clickable-rows z-grid']/following-sibling::span[@class='create-button global-action z-button']/table/tbody/tr[2]/td[text()='Create']")).click();
+		
+		Thread.sleep(500);
+		driver.findElement(By.xpath(".//div[@class='z-fieldset-cnt']/div/div[@class='z-grid-body']/table/tbody[2]/tr[2]//input")).sendKeys("Henry");
+		Thread.sleep(500);
+		driver.findElement(By.xpath(".//div[@class='z-fieldset-cnt']/div/div[@class='z-grid-body']/table/tbody[2]/tr[4]/td[2]/div/input")).sendKeys("Ford");
+		Thread.sleep(500);
+		driver.findElement(By.xpath(".//div[@class='z-grid-body']/table/tbody[2]/tr[5]//input")).sendKeys("00001");
+		Thread.sleep(500);	
+		driver.findElement(By.xpath(".//td[text()='Save']"));
+		Thread.sleep(500);
+		driver.findElement(By.xpath(".//a[@href='/libreplan/']")).click();
+		Thread.sleep(500);
+		
 		//2- Redirection vers la liste des planning via un click sur l'onglet correspondant.
 		ProjectsListPage list = plan.clickProjectslist();
+		Thread.sleep(1000);
 		
 		//3- Accès à la page édition du projet
-		Thread.sleep(1000);
 		ProjectDetailsPage project = list.selectionProject("PROJET_TEST1");
 		
 		//4- Redirection vers la page de visualisation du planning
 		ProjectSchedulingPage schedule = project.clickProjectScheduling();
 		
-		//5- Changement de vue vers la vue Année
-		schedule.menuDeroulantVue("Year");
+		//5- Click droit sur le rectangle bleue symbolisant la durée d'une tâche
+		ProjectSchedulingMenu scheduleMenu = schedule.rightClickProjectslist();
 		
-		//6- Changement de vue vers la vue Trimestre
-		schedule.menuDeroulantVue("Quarter");
+		//6 Choix du sous-menu d'allocation de ressources
+		PopupTaskPage task = scheduleMenu.clickResourcesAllocation();
 		
-		//7- Changement de vue vers la vue Mois	
-		schedule.menuDeroulantVue("Month");
+		//7- Affichage de la liste des ressources
+		task.selectAllocations();
 		
-		//Script d'effacement du projet crée durant ces TESTS
-		driver.findElement(By.xpath(".//img[@src='/libreplan/common/img/ico_back.png']")).click();
+		//8- Sélection des ressources
+		task.selectAllocation();
 		Thread.sleep(500);
-		driver.findElement(By.xpath(".//td[text()='OK']")).click();
-		Thread.sleep(2000);
-		driver.findElement(By.xpath(".//td[contains(text(),'Projects')][contains(text(),'List')]")).click();
-		Thread.sleep(1000);
-		driver.findElement(By.xpath(".//img[@src='/libreplan/common/img/ico_borrar1.png']")).click();
-		Thread.sleep(1000);
-		driver.findElement(By.xpath(".//td[text()='OK']")).click();
-		Thread.sleep(1000);
+		
+		//9- Ajout de la ressource
+		task.addAllocation();
+		
+		//10- Validation de l'ajout de la ressource
+		ProjectSchedulingPage schedule2 = task.validateAllocation();
+		Thread.sleep(500);
+		
+		//11- Click sur l'onglet de chargement des ressources
+		ResourcesLoadPage resources = schedule2.clickResourcesLoad();
+		
+		//12- Click sur l'icône à gauche de la ressource afin de dérouler sa tâche d'affectation
+		resources.selectResource();
+		
+		//13- Click à nouveau sur l'icône à gauche de la ressource afin de cacher sa tâche d'affectation
+		resources.selectResource();
+		
+		//14- Click sur la disquette
+		resources.clickSave();
 	}
 
 	
@@ -77,7 +112,7 @@ public class ProTa04 extends BeforeTest {
 	//Réinitialisation de la base de données
 	@After
 	public void teardown() throws SQLException, Exception{
-//		driver.close();
+		driver.close();
 //		IDatabaseTester tester = new JdbcDatabaseTester(driverSQL,jdbcURL, user, password);
 //		IDataSet dataSet = tester.getConnection().createDataSet();
 //		

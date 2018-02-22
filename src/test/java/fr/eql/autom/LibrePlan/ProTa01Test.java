@@ -25,90 +25,51 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.PageFactory;
 
 
-//Cas de test Pro_TA_02 : Ajouter des tâches à un projet
-public class ProTa02 extends BeforeTest {
-
+//Cas de test Pro_TA_01 : Créer un projet
+public class ProTa01Test extends BeforeTest{
+	
 //Corps du test de création de projet
 	@Test
 	public void test() throws InterruptedException {
-		
 		//1- Création de la page de connexion
 		LogPage log = PageFactory.initElements(driver, LogPage.class);
 		//1- Redirection vers la page d'accueuil grâce à la méthode de connexion issue de la page-objet correspondante avec les identifiants admin.
 		ProjectsPlanningPage plan = log.connexion("admin", "admin");
+		Thread.sleep(500);
+		//2- Click sur le bouton d'ajout de projet et redirection sur le popup de l'ajout de projet.
+		PopupProjectAdd projectAdd = plan.clickProjectAdd();
+		//3- Complétion du formulaire d'ajout de projet, validation et redirection sur la page des détails du projet.
+		ProjectDetailsPage project = projectAdd.setProject("PROJET_TEST1", "PRJTST001", "May 8, 2018", "May 18, 2018");
 		
-		//2- Redirection vers la liste des planning via un click sur l'onglet correspondant.
-		ProjectsListPage list = plan.clickProjectslist();
-		Thread.sleep(1000);
-		
-		//3- Accès à la page édition du projet
-		ProjectDetailsPage project = list.selectionProject("PROJET_TEST1");
-		
-		//5- Création d'une nouvelle tâche
-		project.addTask("task1", "5");
-		Thread.sleep(1000);
-		
-		//6- Création de plusieurs nouvelles tâches
-		project.addTask("task2", "5");
-		Thread.sleep(1000);
-		project.addTask("task3", "5");	
-		Thread.sleep(1000);
-		project.addTask("task4", "5");
-		Thread.sleep(1000);
-		
-		//7- Modification de l'ordre de la première tâche vers le bas
-		project.orderTaskDown("task1");
-		Thread.sleep(1000);
-		
-		//8- Modification de l'ordre de la troisième tâche vers le haut
-		project.orderTaskUp("task3");
-		
-		//9- Remplissage des champs des tâches
-		project.setCodeTask1("T1");
-		project.setCodeTask2("T2");
-		project.setCodeTask3("T3");
-		project.setCodeTask4("T4");
-		project.setDateTask1("5/2/18");
-		Thread.sleep(1000);
-		project.setDateTask2("5/6/18");
-		Thread.sleep(1000);
-		project.setDeadline1("5/1/18");
-		Thread.sleep(1000);
-		project.setDeadline2("5/3/18");
-		project.clickSave();
-		project.clickOkPopup();
-		Thread.sleep(1000);
-		
-		//10- Redirection vers la page de visualisation du planning
-		project.clickProjectScheduling();
-		
+		//7- Click sur l'icône d'annulation d'édition ( flèche verte en haut à gauche).
+		project.clickCancel();
+		//8- Annulation de l'annulation d'édition
+		project.clickCancelNo();
+		//9- Click sur l'icône d'annulation d'édition ( flèche verte en haut à gauche).
+		project.clickCancel();
+		//10- Validation de l'annulation d'édition
+		ProjectsPlanningPage projects2 = project.clickCancelYes();
+				
 	}
-
-	
-	
-	
 	
 	//Réinitialisation de la base de données
 	@After
 	public void teardown() throws SQLException, Exception{
-		driver.close();
 //		IDatabaseTester tester = new JdbcDatabaseTester(driverSQL,jdbcURL, user, password);
 //		IDataSet dataSet = tester.getConnection().createDataSet();
 //		
 //		//Vérification de l'insertion
-//		IDatabaseTester tester = new JdbcDatabaseTester(driverSQL,jdbcURL, user, password);
-//		IDataSet dataSet = tester.getConnection().createDataSet();
+//
 //		ITable table = dataSet.getTable("order_element");
 //		
 //		IDataSet expected2 = new FlatXmlDataSetBuilder().build(new File("src/test/dataProjet.xml"));
 //		ITable expectedTable2 = expected2.getTable("order_element");
-//		
 //		Assertion.assertEquals(expectedTable2, table);
 //		
 //		//Suppresion des données insérées
 //	
-//		IDataSet dataSet2 =new FlatXmlDataSetBuilder().build(new File("src/test/dataTask.xml"));
-//		tester.setTearDownOperation(DatabaseOperation.DELETE);
+//		IDataSet dataSet2 =new FlatXmlDataSetBuilder().build(new File("src/test/dataDelete.xml"));
+//		tester.setTearDownOperation(DatabaseOperation.DELETE_ALL);
 //		tester.setDataSet(dataSet2);
 //		tester.onTearDown();
 //		
@@ -118,5 +79,7 @@ public class ProTa02 extends BeforeTest {
 //		ITable expectedTable = expected.getTable("order_element");
 //		
 //		Assertion.assertEquals(expectedTable, table);
+		
+		driver.close();
 	}
 }
