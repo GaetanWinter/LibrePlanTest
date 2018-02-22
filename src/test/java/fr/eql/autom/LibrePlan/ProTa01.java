@@ -49,8 +49,7 @@ public class ProTa01 extends BeforeTest{
 		project.clickCancel();
 		//10- Validation de l'annulation d'édition
 		ProjectsPlanningPage projects2 = project.clickCancelYes();
-		
-		
+				
 	}
 	
 	//Réinitialisation de la base de données
