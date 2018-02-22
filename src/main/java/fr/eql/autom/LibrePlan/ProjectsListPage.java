@@ -16,7 +16,7 @@ public class ProjectsListPage extends PlanPage {
 
 
 	public ProjectDetailsPage selectionProject(String nomProjet){
-	driver.findElement(By.xpath("//span[.='"+nomProjet+"']")).click();;
+		driver.findElement(By.xpath(".//span[text()='"+nomProjet+"']")).click();
 		return PageFactory.initElements(driver, ProjectDetailsPage.class);
 	}
 	

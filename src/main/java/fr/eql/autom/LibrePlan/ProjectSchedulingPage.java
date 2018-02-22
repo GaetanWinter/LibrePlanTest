@@ -30,7 +30,7 @@ public class ProjectSchedulingPage extends ProjectPage {
 	}
 	
 	public void menuDeroulantVue(String periode) {
-		WebElement menu = driver.findElement(By.xpath("//select[@id='"+prefixe()+"p9']"));
+		WebElement menu = driver.findElement(By.xpath(".//option[text()='Year']/ancestor::select"));
 				Select select = new Select(menu);
 				select.selectByVisibleText(periode);
 

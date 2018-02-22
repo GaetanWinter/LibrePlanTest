@@ -27,6 +27,7 @@ public class ProjectPage extends PlanProjectCommonPage {
 		return PageFactory.initElements(driver, ProjectSchedulingPage.class);
 	}
 	
+	@Override
 	public ResourcesLoadPage clickResourcesLoad(){
 		WebDriverWait wait = new WebDriverWait(driver, 10);
 		WebElement resources = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[.='Resources Load']")));

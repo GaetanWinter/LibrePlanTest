@@ -23,7 +23,10 @@ protected final WebDriver driver;
 	
 		public void selectAllocation(){
 			WebDriverWait wait = new WebDriverWait(driver, 10);
-			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[6]/div/table/tbody/tr/td/table/tbody/tr/td/div/div[3]/table/tbody[2]/tr[2]/td[1]/div"))).click();
+//			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[6]/div/table/tbody/tr/td/table/tbody/tr/td/div/div[3]/table/tbody[2]/tr[2]/td[1]/div"))).click();
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//div[text()='Ford, Henry']"))).click();
+
+			
 		}
 		
 		public void addAllocation(){

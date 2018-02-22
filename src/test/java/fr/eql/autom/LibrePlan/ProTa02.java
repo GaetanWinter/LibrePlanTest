@@ -26,47 +26,8 @@ import org.openqa.selenium.support.PageFactory;
 
 
 //Cas de test Pro_TA_02 : Ajouter des tâches à un projet
-public class ProTa02 {
+public class ProTa02 extends BeforeTest {
 
-	WebDriver driver;
-	String driverSQL = "org.postgresql.Driver";
-	String jdbcURL = "jdbc:postgresql://localhost/libreplan";
-	String user = "libreplan";
-	String password = "libreplan";
-
-	
-
-	@Before
-	public void setup() throws SQLException, Exception{
-
-		//Set Up du navigateur
-		String nav = System.getProperty("navigateur");
-		WebDriver driver = null;
-		
-		//nav = "chrome";				
-		if(nav.equals("chrome")) {
-		    driver = new ChromeDriver();
-		}
-		
-		//nav = "internet explorer";				
-		if(nav.equals("ie")) {
-		    driver = new InternetExplorerDriver();
-		}
-		
-		if(nav.equals("firefox")) {
-			//Sélection de firefox comme navigateur	
-
-			System.setProperty("webdriver.gecko.driver", "C:\\projet3\\webdriver\\geckodriver.exe");	
-			FirefoxOptions options = new FirefoxOptions().setProfile(new FirefoxProfile());
-			options.addPreference("browser.tabs.remote.autostart", false);
-			driver = new FirefoxDriver(options);
-		}
-		driver.get("http://localhost:8084/libreplan/common/layout/login.zul");
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-	}	
-	
-	
-	
 //Corps du test de création de projet
 	@Test
 	public void test() throws InterruptedException {
@@ -90,7 +51,7 @@ public class ProTa02 {
 		//6- Création de plusieurs nouvelles tâches
 		project.addTask("task2", "5");
 		Thread.sleep(1000);
-		project.addTask("task3", "5");
+		project.addTask("task3", "5");	
 		Thread.sleep(1000);
 		project.addTask("task4", "5");
 		Thread.sleep(1000);
@@ -107,13 +68,13 @@ public class ProTa02 {
 		project.setCodeTask2("T2");
 		project.setCodeTask3("T3");
 		project.setCodeTask4("T4");
-		project.setDateTask1("5/2/17");
+		project.setDateTask1("5/2/18");
 		Thread.sleep(1000);
-		project.setDateTask2("5/6/17");
+		project.setDateTask2("5/6/18");
 		Thread.sleep(1000);
-		project.setDeadline1("5/1/17");
+		project.setDeadline1("5/1/18");
 		Thread.sleep(1000);
-		project.setDeadline2("5/3/17");
+		project.setDeadline2("5/3/18");
 		project.clickSave();
 		project.clickOkPopup();
 		Thread.sleep(1000);
@@ -128,36 +89,34 @@ public class ProTa02 {
 	
 	
 	//Réinitialisation de la base de données
-	/*
 	@After
 	public void teardown() throws SQLException, Exception{
-	
-		IDatabaseTester tester = new JdbcDatabaseTester(driverSQL,jdbcURL, user, password);
-		IDataSet dataSet = tester.getConnection().createDataSet();
-		
-		//Vérification de l'insertion
-		IDatabaseTester tester = new JdbcDatabaseTester(driverSQL,jdbcURL, user, password);
-		IDataSet dataSet = tester.getConnection().createDataSet();
-		ITable table = dataSet.getTable("order_element");
-		
-		IDataSet expected2 = new FlatXmlDataSetBuilder().build(new File("src/test/dataProjet.xml"));
-		ITable expectedTable2 = expected2.getTable("order_element");
-		
-		Assertion.assertEquals(expectedTable2, table);
-		
-		//Suppresion des données insérées
-	
-		IDataSet dataSet2 =new FlatXmlDataSetBuilder().build(new File("src/test/dataTask.xml"));
-		tester.setTearDownOperation(DatabaseOperation.DELETE);
-		tester.setDataSet(dataSet2);
-		tester.onTearDown();
-		
-		//Vérification de la suppresion
-		ITable table = dataSet.getTable("order_element");
-		IDataSet expected = new FlatXmlDataSetBuilder().build(new File("src/test/dataEmpty.xml"));
-		ITable expectedTable = expected.getTable("order_element");
-		
-		Assertion.assertEquals(expectedTable, table);
+		driver.close();
+//		IDatabaseTester tester = new JdbcDatabaseTester(driverSQL,jdbcURL, user, password);
+//		IDataSet dataSet = tester.getConnection().createDataSet();
+//		
+//		//Vérification de l'insertion
+//		IDatabaseTester tester = new JdbcDatabaseTester(driverSQL,jdbcURL, user, password);
+//		IDataSet dataSet = tester.getConnection().createDataSet();
+//		ITable table = dataSet.getTable("order_element");
+//		
+//		IDataSet expected2 = new FlatXmlDataSetBuilder().build(new File("src/test/dataProjet.xml"));
+//		ITable expectedTable2 = expected2.getTable("order_element");
+//		
+//		Assertion.assertEquals(expectedTable2, table);
+//		
+//		//Suppresion des données insérées
+//	
+//		IDataSet dataSet2 =new FlatXmlDataSetBuilder().build(new File("src/test/dataTask.xml"));
+//		tester.setTearDownOperation(DatabaseOperation.DELETE);
+//		tester.setDataSet(dataSet2);
+//		tester.onTearDown();
+//		
+//		//Vérification de la suppresion
+//		ITable table = dataSet.getTable("order_element");
+//		IDataSet expected = new FlatXmlDataSetBuilder().build(new File("src/test/dataEmpty.xml"));
+//		ITable expectedTable = expected.getTable("order_element");
+//		
+//		Assertion.assertEquals(expectedTable, table);
 	}
-	*/
 }
