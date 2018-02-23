@@ -40,7 +40,7 @@ public class ProTa03Test extends BeforeTest {
 		//1- Redirection vers la page d'accueuil grâce à la méthode de connexion issue de la page-objet correspondante avec les identifiants admin.
 		ProjectsPlanningPage plan = log.connexion("admin", "admin");
 		
-		// Ajout d'une resource
+		// Création d'une resource
 		Actions action = new Actions(driver);
 		WebElement we = driver.findElement(By.xpath(".//table[@class='z-menu-body']//button[contains(text(),'Resources')]"));
 		action.moveToElement(we).build().perform();
@@ -50,17 +50,17 @@ public class ProTa03Test extends BeforeTest {
 		
 		driver.findElement(By.xpath(".//div[@class='clickable-rows z-grid']/following-sibling::span[@class='create-button global-action z-button']/table/tbody/tr[2]/td[text()='Create']")).click();
 		
-		Thread.sleep(500);
+		Thread.sleep(1000);
 		driver.findElement(By.xpath(".//div[@class='z-fieldset-cnt']/div/div[@class='z-grid-body']/table/tbody[2]/tr[2]//input")).sendKeys("Henry");
-		Thread.sleep(500);
+		Thread.sleep(1000);
 		driver.findElement(By.xpath(".//div[@class='z-fieldset-cnt']/div/div[@class='z-grid-body']/table/tbody[2]/tr[4]/td[2]/div/input")).sendKeys("Ford");
-		Thread.sleep(500);
+		Thread.sleep(1000);
 		driver.findElement(By.xpath(".//div[@class='z-grid-body']/table/tbody[2]/tr[5]//input")).sendKeys("00001");
-		Thread.sleep(500);	
+		Thread.sleep(1000);	
 		driver.findElement(By.xpath(".//td[text()='Save']"));
-		Thread.sleep(500);
+		Thread.sleep(1000);
 		driver.findElement(By.xpath(".//a[@href='/libreplan/']")).click();
-		Thread.sleep(500);
+		Thread.sleep(1000);
 		
 		//2- Redirection vers la liste des planning via un click sur l'onglet correspondant.
 		ProjectsListPage list = plan.clickProjectslist();
@@ -83,14 +83,14 @@ public class ProTa03Test extends BeforeTest {
 		
 		//8- Sélection des ressources
 		task.selectAllocation();
-		Thread.sleep(500);
+		Thread.sleep(1000);
 		
 		//9- Ajout de la ressource
 		task.addAllocation();
 		
 		//10- Validation de l'ajout de la ressource
 		ProjectSchedulingPage schedule2 = task.validateAllocation();
-		Thread.sleep(500);
+		Thread.sleep(1000);
 		
 		//11- Click sur l'onglet de chargement des ressources
 		ResourcesLoadPage resources = schedule2.clickResourcesLoad();

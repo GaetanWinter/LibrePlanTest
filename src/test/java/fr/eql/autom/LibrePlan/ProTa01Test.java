@@ -35,7 +35,7 @@ public class ProTa01Test extends BeforeTest{
 		LogPage log = PageFactory.initElements(driver, LogPage.class);
 		//1- Redirection vers la page d'accueuil grâce à la méthode de connexion issue de la page-objet correspondante avec les identifiants admin.
 		ProjectsPlanningPage plan = log.connexion("admin", "admin");
-		Thread.sleep(500);
+		Thread.sleep(1000);
 		//2- Click sur le bouton d'ajout de projet et redirection sur le popup de l'ajout de projet.
 		PopupProjectAdd projectAdd = plan.clickProjectAdd();
 		//3- Complétion du formulaire d'ajout de projet, validation et redirection sur la page des détails du projet.

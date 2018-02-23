@@ -58,10 +58,11 @@ public class ProTa04Test extends BeforeTest {
 		schedule.menuDeroulantVue("Month");
 		
 		//Script d'effacement du projet crée durant ces TESTS
+		Thread.sleep(1000);
 		driver.findElement(By.xpath(".//img[@src='/libreplan/common/img/ico_back.png']")).click();
-		Thread.sleep(500);
+		Thread.sleep(1000);
 		driver.findElement(By.xpath(".//td[text()='OK']")).click();
-		Thread.sleep(2000);
+		Thread.sleep(1500);
 		driver.findElement(By.xpath(".//td[contains(text(),'Projects')][contains(text(),'List')]")).click();
 		Thread.sleep(1000);
 		driver.findElement(By.xpath(".//img[@src='/libreplan/common/img/ico_borrar1.png']")).click();
@@ -77,7 +78,7 @@ public class ProTa04Test extends BeforeTest {
 	//Réinitialisation de la base de données
 	@After
 	public void teardown() throws SQLException, Exception{
-//		driver.close();
+		driver.close();
 //		IDatabaseTester tester = new JdbcDatabaseTester(driverSQL,jdbcURL, user, password);
 //		IDataSet dataSet = tester.getConnection().createDataSet();
 //		
