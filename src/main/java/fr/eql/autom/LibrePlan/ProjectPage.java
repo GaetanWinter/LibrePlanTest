@@ -42,7 +42,8 @@ public class ProjectPage extends PlanProjectCommonPage {
 	
 	public void clickCancel(){
 		WebDriverWait wait = new WebDriverWait(driver, 10);
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//table[@id='"+prefixe()+"s40-box']/tbody/tr[2]/td[2]/img"))).click();
+//		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//table[@id='"+prefixe()+"s40-box']/tbody/tr[2]/td[2]/img"))).click();
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//img[@src='/libreplan/common/img/ico_back.png']"))).click();
 	}
 	
 	public ProjectsPlanningPage clickCancelYes(){
@@ -53,7 +54,8 @@ public class ProjectPage extends PlanProjectCommonPage {
 	
 	public void clickCancelNo(){
 		WebDriverWait wait = new WebDriverWait(driver, 10);
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//table[@id='"+prefixe()+"z4-box']/tbody/tr[2]/td[2]"))).click();
+//		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//table[@id='"+prefixe()+"z4-box']/tbody/tr[2]/td[2]"))).click();
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//span[@class='z-messagebox-btn z-button']//td[@class='z-button-cm'][text()='Cancel']"))).click();
 	}
 	
 

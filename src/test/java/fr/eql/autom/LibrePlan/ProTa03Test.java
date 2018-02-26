@@ -60,7 +60,7 @@ public class ProTa03Test extends BeforeTest {
 		driver.findElement(By.xpath(".//td[text()='Save']"));
 		Thread.sleep(1000);
 		driver.findElement(By.xpath(".//a[@href='/libreplan/']")).click();
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		
 		//2- Redirection vers la liste des planning via un click sur l'onglet correspondant.
 		ProjectsListPage list = plan.clickProjectslist();
@@ -68,18 +68,23 @@ public class ProTa03Test extends BeforeTest {
 		
 		//3- Accès à la page édition du projet
 		ProjectDetailsPage project = list.selectionProject("PROJET_TEST1");
+		Thread.sleep(1000);
 		
 		//4- Redirection vers la page de visualisation du planning
 		ProjectSchedulingPage schedule = project.clickProjectScheduling();
+		Thread.sleep(1000);
 		
 		//5- Click droit sur le rectangle bleue symbolisant la durée d'une tâche
 		ProjectSchedulingMenu scheduleMenu = schedule.rightClickProjectslist();
+		Thread.sleep(1000);
 		
 		//6 Choix du sous-menu d'allocation de ressources
 		PopupTaskPage task = scheduleMenu.clickResourcesAllocation();
+		Thread.sleep(1000);
 		
 		//7- Affichage de la liste des ressources
 		task.selectAllocations();
+		Thread.sleep(1000);
 		
 		//8- Sélection des ressources
 		task.selectAllocation();
@@ -87,6 +92,7 @@ public class ProTa03Test extends BeforeTest {
 		
 		//9- Ajout de la ressource
 		task.addAllocation();
+		Thread.sleep(1000);
 		
 		//10- Validation de l'ajout de la ressource
 		ProjectSchedulingPage schedule2 = task.validateAllocation();
@@ -94,15 +100,18 @@ public class ProTa03Test extends BeforeTest {
 		
 		//11- Click sur l'onglet de chargement des ressources
 		ResourcesLoadPage resources = schedule2.clickResourcesLoad();
+		Thread.sleep(1000);
 		
 		//12- Click sur l'icône à gauche de la ressource afin de dérouler sa tâche d'affectation
 		resources.selectResource();
+		Thread.sleep(1000);
 		
 		//13- Click à nouveau sur l'icône à gauche de la ressource afin de cacher sa tâche d'affectation
 		resources.selectResource();
-		
+		Thread.sleep(1000);
 		//14- Click sur la disquette
 		resources.clickSave();
+		Thread.sleep(1000);
 	}
 
 	

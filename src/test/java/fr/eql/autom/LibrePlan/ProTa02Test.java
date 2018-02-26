@@ -43,6 +43,7 @@ public class ProTa02Test extends BeforeTest {
 		
 		//3- Accès à la page édition du projet
 		ProjectDetailsPage project = list.selectionProject("PROJET_TEST1");
+		Thread.sleep(1500);
 		
 		//5- Création d'une nouvelle tâche
 		project.addTask("task1", "5");
@@ -83,10 +84,6 @@ public class ProTa02Test extends BeforeTest {
 		project.clickProjectScheduling();
 		
 	}
-
-	
-	
-	
 	
 	//Réinitialisation de la base de données
 	@After

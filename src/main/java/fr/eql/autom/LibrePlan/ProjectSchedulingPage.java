@@ -22,7 +22,9 @@ public class ProjectSchedulingPage extends ProjectPage {
 	
 	
 	public ProjectSchedulingMenu rightClickProjectslist(){
-		WebElement blueBox = driver.findElement(By.xpath("//div[@id='"+prefixe()+"430']"));
+//		WebElement blueBox = driver.findElement(By.xpath("//div[@id='"+prefixe()+"430']"));
+		WebElement blueBox = driver.findElement(By.xpath(".//div[@id='listtasks']/div[1]/div[1]"));
+
 		//div[1]/div/div[5]/div[2]/div/div/div/div[2]/div/div/span/div/div[1]/div/span/div[1]/div[2]/div/div/div/div[2]/div/div/div/div[2]/div/div/div/div[1]/div/div[1]/div/div/div[1]/div[1]
 		Actions action = new Actions(driver).contextClick(blueBox);
 		action.build().perform();

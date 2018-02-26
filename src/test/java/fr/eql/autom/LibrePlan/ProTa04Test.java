@@ -70,10 +70,6 @@ public class ProTa04Test extends BeforeTest {
 		driver.findElement(By.xpath(".//td[text()='OK']")).click();
 		Thread.sleep(1000);
 	}
-
-	
-	
-	
 	
 	//Réinitialisation de la base de données
 	@After

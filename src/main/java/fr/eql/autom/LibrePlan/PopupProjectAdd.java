@@ -46,20 +46,28 @@ protected final WebDriver driver;
 	
 	public ProjectDetailsPage setProject(String projectName, String projectCode, String dateBegin, String dateEnd) throws InterruptedException{
 		WebDriverWait wait = new WebDriverWait(driver, 10);
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='"+prefixe()+"p7']"))).sendKeys(projectName);;
+//		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='"+prefixe()+"p7']"))).sendKeys(projectName);
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//div[@class='z-window-modal z-window-modal-shadow']/div[3]//div[@class='z-grid-body']/table/tbody[2]/tr[1]/td[2]/div/input"))).sendKeys(projectName);
+
 		//projectNameSpace.sendKeys(projectName);
 		//checkBoxCode.click();
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='"+prefixe()+"48-real']"))).click();
+//		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='"+prefixe()+"48-real']"))).click();
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//div[@class='z-window-modal z-window-modal-shadow']/div[3]//div[@class='z-grid-body']/table/tbody[2]/tr[3]/td[2]//span/input"))).click();
+
 		//projectCodeSpace.sendKeys(projectCode);
-			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='"+prefixe()+"38']"))).clear();
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='"+prefixe()+"38']"))).sendKeys(projectCode);
+//		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='"+prefixe()+"38']"))).clear();
+//		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='"+prefixe()+"38']"))).sendKeys(projectCode);
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//div[@class='z-window-modal z-window-modal-shadow']/div[3]//div[@class='z-grid-body']/table/tbody[2]/tr[3]/td[2]//tbody/tr/td/input"))).clear();
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//div[@class='z-window-modal z-window-modal-shadow']/div[3]//div[@class='z-grid-body']/table/tbody[2]/tr[3]/td[2]//tbody/tr/td/input"))).sendKeys(projectCode);
 		//projectDateBegin.sendKeys(dateBegin);
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='"+prefixe()+"k9-real']"))).clear();
+//		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='"+prefixe()+"k9-real']"))).clear();
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//div[@class='z-window-modal z-window-modal-shadow']/div[3]//div[@class='z-grid-body']/table/tbody[2]/tr[4]/td[2]/div/i/input"))).clear();
+
 		Thread.sleep(500);
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='"+prefixe()+"k9-real']"))).sendKeys(dateBegin);
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//div[@class='z-window-modal z-window-modal-shadow']/div[3]//div[@class='z-grid-body']/table/tbody[2]/tr[4]/td[2]/div/i/input"))).sendKeys(dateBegin);
 		//projectDateEnd.sendKeys(dateEnd);
 		Thread.sleep(500);
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='"+prefixe()+"n9-real']"))).sendKeys(dateEnd);
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//div[@class='z-window-modal z-window-modal-shadow']/div[3]//div[@class='z-grid-body']/table/tbody[2]/tr[5]/td[2]/div/i/input"))).sendKeys(dateEnd);
 		accept.click();
 		return PageFactory.initElements(driver, ProjectDetailsPage.class);
 		
